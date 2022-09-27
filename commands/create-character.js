@@ -92,6 +92,7 @@ module.exports = {
 
 		// Show the modal to the user
 		await interaction.showModal(modal);
+
     }
 
 }

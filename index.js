@@ -20,6 +20,15 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
     if (interaction.isCommand()) handleCommand(client, interaction);
+
+    if (interaction.customId === 'CreateCharacter') {
+		await interaction.reply({ content: 'Your submission was received successfully!' });
+        const characterName = interaction.fields.getTextInputValue('nameInput');
+	    const characterRace = interaction.fields.getTextInputValue('raceInput');
+        const characterClasse = interaction.fields.getTextInputValue('classeInput');
+        const characterLevel = interaction.fields.getTextInputValue('levelInput');
+	    console.log({ characterName, characterRace, characterClasse, characterLevel });
+	}
 });
 
 client.login(token);
