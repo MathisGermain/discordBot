@@ -12,7 +12,7 @@ module.exports = {
      * @param {CommandInteraction} interaction 
      */    
     async execute(interaction){
-
+		/*
 		const fs = require("fs");
 		fs.readFile("./databases/Personnages/"+interaction.user.tag+".json", "utf8", (err, jsonString) => {
 		if (err) {
@@ -20,6 +20,8 @@ module.exports = {
 			return;
 		}else{
 			console.log("File data:", jsonString);
+		});	
+		*/
 			const modal = new ModalBuilder()
 				.setCustomId('defineStats')
 				.setTitle('Vos statistiques');
@@ -58,8 +60,8 @@ module.exports = {
 			modal.addComponents(actionRow1, actionRow2,actionRow3,actionRow4,actionRow5);
 			interaction.showModal(modal);
 		}
-		});
+		
 
-    }
+    
 
 }
