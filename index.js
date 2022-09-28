@@ -44,6 +44,16 @@ client.on('interactionCreate', async interaction => {
         saveStats(characterForce,characterCourage,characterAgil,characterIntel,characterCharisme,interaction.user.tag);
 		await interaction.reply({ content: 'Vos statistiques ont été définis' });
 	}
+
+  if (interaction.customId === 'defineRessources') {
+    console.log(interaction.user.tag);
+    const maxHealth = interaction.fields.getTextInputValue('maxHealthInput');
+    const health = interaction.fields.getTextInputValue('healthInput');
+    const maxMana = interaction.fields.getTextInputValue('maxManaInput');
+    const mana = interaction.fields.getTextInputValue('manaInput');
+    saveRessources(maxHealth,health,maxMana,mana,interaction.user.tag)
+await interaction.reply({ content: 'Vos ressources ont été définis' });
+}
 });
 
 function getUserConfig(userId){
@@ -116,6 +126,31 @@ async function saveStats(characterForce,characterCourage,characterAgil,character
       
     console.log("Personnage enregistré");
     
+}
+
+async function saveRessources(maxHealth,health,maxMana,mana,userId){
+  var userDataString = await getUserConfig(userId);
+  var userData  = JSON.parse(userDataString);
+  console.log("Valeur retourné :" +userData);
+  userData.Sante = maxHealth;
+  userData.SanteActuel = health;
+  userData.Mana = maxMana;
+  userData.ManaActuel = mana;
+  
+  console.log("UserData Modify : " + userData);
+  
+  
+  fs.writeFile("./databases/Personnages/"+userId+".json", JSON.stringify(userData),(err) => {
+      if (err)
+        console.log(err);
+      else {
+        console.log("File written successfully\n");
+      }
+    });
+    
+    
+  console.log("Personnage enregistré");
+  
 }
 
 client.login(token);
