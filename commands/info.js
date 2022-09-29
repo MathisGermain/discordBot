@@ -22,7 +22,7 @@ module.exports = {
 
         const exampleEmbed = new EmbedBuilder()
         .setColor(0x0099FF)
-        .setTitle('Zelkhar')
+        .setTitle(userData.nom)
         .setThumbnail('https://i.imgur.com/AfFp7pu.png%27')
         .addFields(
             { name: 'Race', value: userData.race, inline: true },
