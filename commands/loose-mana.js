@@ -41,8 +41,24 @@ module.exports = {
             }
           });
 
+          let ratioMana = userData.ManaActuel / userData.Mana * 10;
+          var customMana = "";
+          for(let x = 0; x < 10;x++){
+              if(ratioMana>x){
+                  customMana = customMana + "💙";
+              }else{
+                  customMana = customMana + "🖤";
+              }
+          }
 
-        await interaction.reply(userData.nom+' a utilisé '+amountDamage+' points de mana. Son mana actuel est de : '+userData.ManaActuel+'/'+userData.Mana);
+          const exampleEmbed = new EmbedBuilder()
+          .setColor(0x0099FF)
+          .setTitle(userData.nom +' a utilisé '+amountDamage+' points de mana 💧')
+          .setThumbnail(userData.PortraitWin)
+          .addFields(
+              { name: 'Son mana actuel est de : '+userData.ManaActuel+'/'+userData.Mana, value: customMana, inline: true },
+          );
+          await interaction.reply({ embeds: [ exampleEmbed ] });  
     }
 }
 

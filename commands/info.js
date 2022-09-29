@@ -19,19 +19,36 @@ module.exports = {
         console.log("USERDATA INFO " + userDataString);
         var userData  = JSON.parse(userDataString);
         console.log("Verication fonction : " + userData);
-
+        console.log("Portrait : " + userData.Portrait);
+        let ratioHP = userData.SanteActuel / userData.Sante * 10;
+        let ratioMana = userData.ManaActuel / userData.Mana * 10;
+        var customHp = "";
+        var customMana = "";
+        for(let x = 0; x < 10;x++){
+            console.log("Tour " + x);
+            if(ratioHP>x){
+                customHp = customHp + "❤️";
+            }else{
+                customHp = customHp + "🖤";
+            }
+            if(ratioMana>x){
+                customMana = customMana + "💙";
+            }else{
+                customMana = customMana + "🖤";
+            }
+        }
         const exampleEmbed = new EmbedBuilder()
         .setColor(0x0099FF)
         .setTitle(userData.nom)
-        .setThumbnail('https://i.imgur.com/AfFp7pu.png%27')
+        .setThumbnail(userData.Portrait)
         .addFields(
             { name: 'Race', value: userData.race, inline: true },
             { name: 'Classe', value: userData.classe, inline: true },
             { name: '\u200B', value: '\u200B' },
             { name: 'Niveau', value: userData.niveau, inline: true },
             { name: '\u200B', value: '\u200B' },
-            { name: 'Vie', value: userData.SanteActuel+"/"+userData.Sante, inline: true },
-            { name: 'Mana', value: userData.ManaActuel+"/"+userData.Mana, inline: true },
+            { name: 'Vie : ' + userData.SanteActuel+"/"+userData.Sante, value: customHp, inline: true },
+            { name: 'Mana : ' + userData.ManaActuel+"/"+userData.Mana , value: customMana, inline: true },
             { name: '\u200B', value: '\u200B' },
             { name: 'Courage', value: userData.Courage, inline: true },
             { name: 'Force', value: userData.Force, inline: true },

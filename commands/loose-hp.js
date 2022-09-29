@@ -41,8 +41,25 @@ module.exports = {
             }
           });
 
+          let ratioHP = userData.SanteActuel / userData.Sante * 10;
+          var customHp = "";
+          for(let x = 0; x < 10;x++){
+              console.log("Tour " + x);
+              if(ratioHP>x){
+                  customHp = customHp + "❤️";
+              }else{
+                  customHp = customHp + "🖤";
+              }
+          }
 
-        await interaction.reply(userData.nom+' a perdu '+amountDamage+' points de vie. Sa santé actuelle est de : '+userData.SanteActuel+'/'+userData.Sante);
+          const exampleEmbed = new EmbedBuilder()
+          .setColor(0x0099FF)
+          .setTitle(userData.nom +' a perdu '+amountDamage+' points de vie 🩸')
+          .setThumbnail(userData.PortraitLoose)
+          .addFields(
+              { name: 'Sa santé actuelle est de : '+userData.SanteActuel+'/'+userData.Sante, value: customHp, inline: true },
+          );
+          await interaction.reply({ embeds: [ exampleEmbed ] });  
     }
 }
 

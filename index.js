@@ -54,6 +54,16 @@ client.on('interactionCreate', async interaction => {
     saveRessources(maxHealth,health,maxMana,mana,interaction.user.tag)
 await interaction.reply({ content: 'Vos ressources ont été définis' });
 }
+
+if (interaction.customId === 'definePictures') {
+  console.log(interaction.user.tag);
+  const portrait = interaction.fields.getTextInputValue('picInput');
+  const portraitLoose = interaction.fields.getTextInputValue('pic2Input');
+  const portraitWin = interaction.fields.getTextInputValue('pic3Input');
+  savePictures(portrait,portraitLoose,portraitWin,interaction.user.tag)
+await interaction.reply({ content: 'Vos ressources ont été définis' });
+}
+
 });
 
 function getUserConfig(userId){
@@ -84,7 +94,10 @@ async function saveCharacter(name,race,classe,level,userId){
         Sante:0,
         SanteActuel:0,
         Mana:0,
-        ManaActuel:0
+        ManaActuel:0,
+        Portrait:"https://i.imgur.com/jKvmpoC.jpeg",
+        PortraitWin:"https://i.imgur.com/jKvmpoC.jpeg",
+        PortraitLoose:"https://i.imgur.com/jKvmpoC.jpeg",
 
     }
     
@@ -151,6 +164,30 @@ async function saveRessources(maxHealth,health,maxMana,mana,userId){
     
   console.log("Personnage enregistré");
   
+}
+
+
+async function savePictures(portrait,portraitLoose,portraitWin,userId){
+  var userDataString = await getUserConfig(userId);
+  var userData  = JSON.parse(userDataString);
+  console.log("Valeur retourné :" +userData);
+  userData.Portrait = portrait;
+  userData.PortraitWin = portraitWin;
+  userData.PortraitLoose = portraitLoose;
+  
+  console.log("UserData Modify : " + userData);
+  
+  
+  fs.writeFile("./databases/Personnages/"+userId+".json", JSON.stringify(userData),(err) => {
+      if (err)
+        console.log(err);
+      else {
+        console.log("File written successfully\n");
+      }
+    });
+    
+    
+  console.log("Personnage enregistré");
 }
 
 client.login(token);
