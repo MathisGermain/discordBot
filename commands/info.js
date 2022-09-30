@@ -26,15 +26,40 @@ module.exports = {
         var customMana = "";
         for(let x = 0; x < 10;x++){
             console.log("Tour " + x);
-            if(ratioHP>x){
-                customHp = customHp + "❤️";
-            }else{
-                customHp = customHp + "🖤";
+            if(x == 0){
+                if(ratioHP>x){
+                    customHp = customHp + "<:sstart:1025149897953005618>";
+                }else{
+                    customHp = customHp + "<:svide:1025149910896607232>";
+                }
+                if(ratioMana>x){
+                    customMana = customMana + "<:mstart:1025149998310109294>";
+                }else{
+                    customMana = customMana + "<:mvide:1025150013032124436>";
+                }        
             }
-            if(ratioMana>x){
-                customMana = customMana + "💙";
+            if(x == 9){
+                if(ratioHP>x){
+                    customHp = customHp + "<:send:1025149961425399878>";
+                }else{
+                    customHp = customHp + "<:endvide:1025149810082320394>";
+                }
+                if(ratioMana>x){
+                    customMana = customMana + "<:mend:1025149974964617347>";
+                }else{
+                    customMana = customMana + "<:endvide:1025149810082320394>";
+                }
             }else{
-                customMana = customMana + "🖤";
+                if(ratioHP>x){
+                    customHp = customHp + "<:smid:1025149950633455717>";
+                }else{
+                    customHp = customHp + "<:midvide:1025149930962157570>";
+                }
+                if(ratioMana>x){
+                    customMana = customMana + "<:mmid:1025149986532495402>";
+                }else{
+                    customMana = customMana + "<:midvide:1025149930962157570>";
+                }
             }
         }
         const exampleEmbed = new EmbedBuilder()
@@ -44,17 +69,16 @@ module.exports = {
         .addFields(
             { name: 'Race', value: userData.race, inline: true },
             { name: 'Classe', value: userData.classe, inline: true },
+            { name: 'Niveau', value: '<:level:1025150843298795590>'+userData.niveau, inline: true },
             { name: '\u200B', value: '\u200B' },
-            { name: 'Niveau', value: userData.niveau, inline: true },
+            { name: 'Vie : ' + userData.SanteActuel+"/"+userData.Sante, value: customHp, inline: false },
+            { name: 'Mana : ' + userData.ManaActuel+"/"+userData.Mana , value: customMana, inline: false },
             { name: '\u200B', value: '\u200B' },
-            { name: 'Vie : ' + userData.SanteActuel+"/"+userData.Sante, value: customHp, inline: true },
-            { name: 'Mana : ' + userData.ManaActuel+"/"+userData.Mana , value: customMana, inline: true },
-            { name: '\u200B', value: '\u200B' },
-            { name: 'Courage', value: userData.Courage, inline: true },
-            { name: 'Force', value: userData.Force, inline: true },
-            { name: 'Adresse', value: userData.Adresse, inline: true },
-            { name: 'Intelligence', value: userData.Intelligence, inline: true },
-            { name: 'Charisme', value: userData.Charisme, inline: true },
+            { name: '<:courage:1025155736298324019> Courage', value: userData.Courage, inline: true },
+            { name: '<:force:1025149829820719114> Force', value: userData.Force, inline: true },
+            { name: '<:adresse:1025149741597732894> Adresse', value: userData.Adresse, inline: true },
+            { name: '<:intel:1025149849617838191> Intelligence', value: userData.Intelligence, inline: true },
+            { name: '<:charisme:1025149787231768696> Charisme', value: userData.Charisme, inline: true },
         )
         .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
             interaction.reply({ embeds: [ exampleEmbed ] });
