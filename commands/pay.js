@@ -41,7 +41,7 @@ module.exports = {
             .setTitle(userData.nom)
             .setThumbnail(userData.Portrait)
             .addFields(
-                { name: 'Paye : ', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
+                { name: 'Paye <:gold:1025150079738314793> ', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
             );
             await interaction.reply({ embeds: [ exampleEmbed ] }); 
         }else{

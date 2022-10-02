@@ -32,7 +32,7 @@ module.exports = {
                 .setTitle(userData.nom)
                 .setThumbnail(userData.Portrait)
                 .addFields(
-                    { name: 'Regarde l\'or de sa banque : ', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
+                    { name: 'Regarde l\'or de sa banque :bank:', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
                 );
                 await interaction.reply({ embeds: [ exampleEmbed ] }); 
             }else{
@@ -41,7 +41,7 @@ module.exports = {
                 .setTitle(userData.nom)
                 .setThumbnail(userData.Portrait)
                 .addFields(
-                    { name: 'Regarde l\'or de sa banque : ', value: userData.GoldBank+' pièces d\'or <:gold:1025387630894010459>', inline: true },
+                    { name: 'Regarde l\'or de sa banque :bank:', value: userData.GoldBank+' pièces d\'or <:gold:1025387630894010459>', inline: true },
                 );
                 await interaction.reply({ embeds: [ exampleEmbed ] }); 
             }

@@ -39,7 +39,7 @@ module.exports = {
             .setTitle(userData.nom)
             .setThumbnail(userData.PortraitWin)
             .addFields(
-                { name: 'A obtenu de l\'argent : ', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
+                { name: 'A obtenu de l\'argent <:gold:1025150079738314793> ', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
             );
             await interaction.reply({ embeds: [ exampleEmbed ] }); 
         

@@ -32,7 +32,7 @@ module.exports = {
                 .setTitle(userData.nom)
                 .setThumbnail(userData.Portrait)
                 .addFields(
-                    { name: 'Montre l\'or de sa bourse : ', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
+                    { name: 'Montre l\'or de sa bourse <:gold:1025150079738314793> ', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
                 );
                 await interaction.reply({ embeds: [ exampleEmbed ] }); 
             }else{
@@ -41,7 +41,7 @@ module.exports = {
                 .setTitle(userData.nom)
                 .setThumbnail(userData.Portrait)
                 .addFields(
-                    { name: 'Montre l\'or de sa bourse : ', value: userData.Gold+' pièces d\'or <:gold:1025387630894010459>', inline: true },
+                    { name: 'Montre l\'or de sa bourse <:gold:1025150079738314793> ', value: userData.Gold+' pièces d\'or <:gold:1025387630894010459>', inline: true },
                 );
                 await interaction.reply({ embeds: [ exampleEmbed ] }); 
             }
