@@ -64,6 +64,13 @@ if (interaction.customId === 'definePictures') {
 await interaction.reply({ content: 'Vos ressources ont été définis' });
 }
 
+if (interaction.commandName === 'money') {
+  const user = await client.users.fetch(interaction.user.id);
+  var userDataString = await getUserConfig(interaction.user.tag);
+  var userData  = JSON.parse(userDataString);
+  await user.send('Vous possédez ' + userData.Gold +' pièces d\'or <:gold:1025387630894010459> dans votre bourse. Ainsi que ' +userData.GoldBank +' pièces d\'or <:gold:1025387630894010459> dans votre banque.');
+}
+
 });
 
 function getUserConfig(userId){
