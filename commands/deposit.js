@@ -44,7 +44,9 @@ module.exports = {
             .addFields(
                 { name: 'Dépose à la banque :bank:', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
             );
-            await interaction.reply({ embeds: [ exampleEmbed ] }); 
+            interaction.deferReply();
+            interaction.deleteReply();
+            await interaction.channel.send({ embeds: [ exampleEmbed ] }); 
         }else{
             const exampleEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
@@ -53,7 +55,9 @@ module.exports = {
             .addFields(
                 { name: 'N\'a pas assez d\'argent pour déposer ', value: amount+' pièces d\'or <:gold:1025387630894010459>', inline: true },
             );
-            await interaction.reply({ embeds: [ exampleEmbed ] }); 
+            interaction.deferReply();
+            interaction.deleteReply();
+            await interaction.channel.send({ embeds: [ exampleEmbed ] }); 
         } 
     }
 }

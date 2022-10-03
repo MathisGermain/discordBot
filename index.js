@@ -105,6 +105,8 @@ async function saveCharacter(name,race,classe,level,userId){
         Portrait:"https://i.imgur.com/jKvmpoC.jpeg",
         PortraitWin:"https://i.imgur.com/jKvmpoC.jpeg",
         PortraitLoose:"https://i.imgur.com/jKvmpoC.jpeg",
+        Gold:0,
+        GoldBank:0
 
     }
     

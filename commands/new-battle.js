@@ -5,34 +5,35 @@ const fs = require('fs');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('talk')
-        .setDescription('Parler')
-        .addStringOption(option =>
-            option.setName("message")
-                .setDescription("Message")
-                .setRequired(true)
-                ),
+        .setName('new-battle')
+        .setDescription('Initialise un nouveau combat'),
 
     /**
      * 
      * @param {CommandInteraction} interaction 
      */    
     async execute(interaction){
-        const message = interaction.options.getString('message');
-
         var userDataString = await getUserConfig(interaction.user.tag);
         var userData  = JSON.parse(userDataString);
 
-          const exampleEmbed = new EmbedBuilder()
-          .setColor(0x0099FF)
-          .setTitle(userData.nom)
-          .setThumbnail(userData.Portrait)
-          .addFields(
-              { name: 'Parle', value: message, inline: true },
-          );
+        const newCombatdata = {
+            nom:"default",
+            round:1,
+            state:0,
+            characterRound:-1,
+            initiativeList:{}
+        }
+        fs.writeFile("./databases/Combats/combatInfo.json", JSON.stringify(newCombatdata),(err) => {
+            if (err)
+              console.log(err);
+            else {
+              console.log("File written successfully\n");
+    
+            }
+          });
           interaction.deferReply();
           interaction.deleteReply();
-          await interaction.channel.send({ embeds: [ exampleEmbed ] });  
+          await interaction.channel.send('<:force:1025149829820719114> Un nouveau combat commence <:force:1025149829820719114>');
     }
 }
 

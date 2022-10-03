@@ -74,14 +74,17 @@ module.exports = {
             { name: 'Vie : ' + userData.SanteActuel+"/"+userData.Sante, value: customHp, inline: false },
             { name: 'Mana : ' + userData.ManaActuel+"/"+userData.Mana , value: customMana, inline: false },
             { name: '\u200B', value: '\u200B' },
-            { name: '<:courage:1025155736298324019> Courage', value: userData.Courage, inline: true },
+            { name: '<:health:1026614272337399808> Courage', value: userData.Courage, inline: true },
             { name: '<:force:1025149829820719114> Force', value: userData.Force, inline: true },
             { name: '<:adresse:1025149741597732894> Adresse', value: userData.Adresse, inline: true },
             { name: '<:intel:1025149849617838191> Intelligence', value: userData.Intelligence, inline: true },
             { name: '<:charisme:1025149787231768696> Charisme', value: userData.Charisme, inline: true },
         )
         .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
-            interaction.reply({ embeds: [ exampleEmbed ] });
+            
+        interaction.deferReply();
+        interaction.deleteReply();
+        await interaction.channel.send({ embeds: [ exampleEmbed ] }); 
         }
 
 }

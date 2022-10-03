@@ -26,7 +26,10 @@ module.exports = {
           .addFields(
               { name: 'S\'informe sur ses finances', value: "Les informations sont envoyés en message privé", inline: true },
           );
-          await interaction.reply({ embeds: [ exampleEmbed ] });
+          
+          interaction.deferReply();
+          interaction.deleteReply();
+          await interaction.channel.send({ embeds: [ exampleEmbed ] }); 
     }
 }
 

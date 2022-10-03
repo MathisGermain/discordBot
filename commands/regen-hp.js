@@ -70,7 +70,10 @@ module.exports = {
           .addFields(
               { name: 'Sa santé actuelle est de : '+userData.SanteActuel+'/'+userData.Sante, value: customHp, inline: true },
           );
-          await interaction.reply({ embeds: [ exampleEmbed ] });  
+          
+          interaction.deferReply();
+          interaction.deleteReply();
+          await interaction.channel.send({ embeds: [ exampleEmbed ] });  
     }
 }
 
