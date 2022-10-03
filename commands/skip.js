@@ -25,17 +25,6 @@ module.exports = {
             combatData.characterRound = 0;
             combatData.round = combatData.round + 1;
         }
-
-          const exampleEmbed = new EmbedBuilder()
-          .setColor(0x0099FF)
-          .setTitle("Tour de " + combatData.initiativeList[combatData.characterRound].name)
-          .addFields(
-              { name: 'Information', value: " Go", inline: true },
-          );
-
-
-
-
           fs.writeFile("./databases/Combats/combatInfo.json", JSON.stringify(combatData),(err) => {
             if (err)
               console.log(err);
@@ -48,7 +37,7 @@ module.exports = {
           
           interaction.deferReply();
           interaction.deleteReply();
-          await interaction.channel.send({ embeds: [ exampleEmbed ] });  
+          await interaction.channel.send("<:roleplaying:1026638227307761664><:sandclock:1026638358019051570><:cube:1026638242893803602> Tour de " + combatData.initiativeList[combatData.characterRound].name + " <:cube:1026638242893803602><:sandclock:1026638358019051570><:roleplaying:1026638227307761664>                <:stopwatch:1026638305422491688> Tour "+combatData.round+" <:stopwatch:1026638305422491688>");  
     }
 }
 
