@@ -71,6 +71,50 @@ if (interaction.commandName === 'money') {
   await user.send('Vous possédez ' + userData.Gold +' pièces d\'or <:gold:1025387630894010459> dans votre bourse. Ainsi que ' +userData.GoldBank +' pièces d\'or <:gold:1025387630894010459> dans votre banque.');
 }
 
+if (interaction.customId === 'select') {
+  console.log(interaction.values[0]);
+  const characterName = interaction.values[0];
+        var combatDataString = await getBattleConfig();
+        var combatData  = JSON.parse(combatDataString);
+        var countPlace = Object.keys(combatData.initiativeList).length
+        combatData.initiativeList[countPlace] = {
+            name : characterName,
+            type : "player",
+            statut : "alive"
+        };
+        fs.writeFile("./databases/Combats/combatInfo.json", JSON.stringify(combatData),(err) => {
+            if (err)
+              console.log(err);
+            else {
+              console.log("File written successfully\n");
+    
+            }
+          });
+  await interaction.update({ content: '<:heal:1026614286639976478> '+ characterName + " à été ajouté au combat <:force:1025149829820719114>", components: [] });
+}
+
+if (interaction.customId === 'select-kill') {
+  console.log(interaction.values[0]);
+  const characterName = interaction.values[0];
+        var combatDataString = await getBattleConfig();
+        var combatData  = JSON.parse(combatDataString);
+
+        for(var key in combatData.initiativeList) {
+          if(combatData.initiativeList[key].name == characterName){
+            combatData.initiativeList[key].statut = "dead"; 
+          }
+       }
+        fs.writeFile("./databases/Combats/combatInfo.json", JSON.stringify(combatData),(err) => {
+            if (err)
+              console.log(err);
+            else {
+              console.log("File written successfully\n");
+    
+            }
+          });
+  await interaction.update({ content: '<:assasin:1027531702567977020> '+ characterName + " à été tué <:skull:1026614307670196254>", components: [] });
+}
+
 });
 
 function getUserConfig(userId){
@@ -85,6 +129,19 @@ function getUserConfig(userId){
         }
     });
   });
+}
+
+function getBattleConfig(){
+  return new Promise((resolve) => {
+  fs.readFile("databases/Combats/combatInfo.json", "utf8", (err, jsonString) => {
+  if (err) {
+    console.log("File read failed:", err);
+    resolve("");
+  }else{
+      resolve(jsonString);
+      }
+  });
+});
 }
 
 async function saveCharacter(name,race,classe,level,userId){

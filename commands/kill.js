@@ -5,8 +5,8 @@ const fs = require('fs');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('add-user')
-        .setDescription('Ajoute un joueur au combat'),
+        .setName('kill')
+        .setDescription('Tue un ennemis'),
 
     /**
      * 
@@ -15,59 +15,48 @@ module.exports = {
     async execute(interaction){
         var combatDataString = await getBattleConfig();
         var combatData  = JSON.parse(combatDataString);
-        var countPlace = Object.keys(combatData.initiativeList).length
-
-        names = await readdirAsync("./databases/Personnages/");
-
-        console.log(names);
-        console.log("First Name", names[0]);
-        console.log("Count Place : " + countPlace);
-
-        var data = [];
+        str = JSON.stringify(combatData, null, 4); // (Optional) beautiful indented output.
+        console.log(str);
         var nameList = [];
 
-        for (const filename of names) {
-          console.log(filename);
-          var userDataString = await getUserConfig(filename);
-          var userData = JSON.parse(userDataString);
-          nameList.push(userData);
-        }
+
+        for(var key in combatData.initiativeList) {
+            console.log("Key : " + key);
+            console.log("Check : " + combatData.initiativeList[key].name);
+            nameList.push(combatData.initiativeList[key].name);
+         }
 
         console.log("Data : " + nameList)
         str = JSON.stringify(nameList, null, 4); // (Optional) beautiful indented output.
         console.log(str); 
 
 
-    const selectTest = new SelectMenuBuilder()
-					.setCustomId('select')
-					.setPlaceholder('Joueurs');
+        const selectTest = new SelectMenuBuilder()
+					.setCustomId('select-kill')
+					.setPlaceholder('Cible');
 
           
 
         var optionList = [];
         for(const user of nameList){
           optionList.push({
-            label:user.nom,
-            description:user.race,
-            value:user.nom
+            label:user,
+            description:user,
+            value:user
           });
         } 
 
         str = JSON.stringify(optionList, null, 4);
-
-        console.log("OptionList : " + str)
-        
+        console.log("List " + str);
         selectTest.addOptions(optionList);
 
-        console.log("OK Validé");
 
-
-          const row = new ActionRowBuilder()
+          const row2 = new ActionRowBuilder()
 			    .addComponents(selectTest);
 
           interaction.deferReply();
           interaction.deleteReply();      
-		      await interaction.channel.send({ content: '<:heal:1026614286639976478> Ajout d\'un joueur au combat', components: [row] });
+		    await interaction.channel.send({ content: '<:coeur:1027576100580241541> Qui avez vous vaincu ?', components: [row2] });
   }
 }
 

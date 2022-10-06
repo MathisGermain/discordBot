@@ -1,1 +1,1 @@
-{"nom":"default","round":4,"state":0,"characterRound":1,"initiativeList":{"0":{"name":"Kathou"},"1":{"name":"Tissma"}}}
+{"nom":"default","round":3,"state":0,"characterRound":0,"initiativeList":{"0":{"name":"Riacor","type":"player","statut":"alive"},"1":{"name":"Zelkhar","type":"player","statut":"alive"},"2":{"name":"Balrog","type":"enemy","statut":"dead"},"3":{"name":"Reinhart Aichi","type":"player","statut":"alive"}}}
